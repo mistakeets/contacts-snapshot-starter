@@ -5,16 +5,41 @@ const server = require('../server/routes/contacts.js')
 
 chai.use(chaiHttp)
 
-describe('/contact', () => {
+describe('/contacts', () => {
   it('should create a new contact', (done) => {
     chai.request('http://localhost:3000')
-      .post('/contacts/new')
-      .send({ "first_name": "Some", "last_name": "Person" })
+      .post('/contacts')
+      .type('form')
+      .send({ first_name: 'That', last_name: 'Person' })
       .end((error, response) => {
         if (error) {
           done(error)
         }
         expect(response).to.have.status(200)
+        done()
+      })
+  })
+
+  it('should return a first name and last name', (done) => {
+    chai.request('http://localhost:3000')
+      .get('/contacts/1')
+      .end((error, response) => {
+        if (error) {
+          done(error)
+        }
+        expect(response.text).to.contain('<h1>Jared&nbsp;Grippe</h1>')
+        done()
+      })
+  })
+
+  it('should delete a contact', (done) => {
+    chai.request('http://localhost:3000')
+      .get('/contacts/5/delete')
+      .end((error, response) => {
+        if (error) {
+          done(error)
+        }
+        expect(response.text).to.not.contain('<h1>Tanner&nbsp;Welsh</h1>')
         done()
       })
   })
