@@ -8,9 +8,8 @@ chai.use(chaiHttp)
 
 describe('/contacts', () => {
 
-  beforeEach((done) => {
-    db.initDb()
-    done()
+  beforeEach(() => {
+    return db.initDb()
   })
 
   it('should create a new contact', (done) => {
@@ -40,17 +39,14 @@ describe('/contacts', () => {
   })
 
   it('should return a first name and last name', (done) => {
-    setTimeout(function() {
-      chai.request('http://localhost:3000')
-        .get('/contacts/1')
-        .end((error, response) => {
-          if (error) {
-            done(error)
-          }
-          console.log('what is the response? -> ', response.text)
-          expect(response.text).to.contain('<h1>Jared&nbsp;Grippe</h1>')
-          done()
-        })
-    }, 500)
+    chai.request('http://localhost:3000')
+      .get('/contacts/1')
+      .end((error, response) => {
+        if (error) {
+          done(error)
+        }
+        expect(response.text).to.contain('<h1>Jared&nbsp;Grippe</h1>')
+        done()
+      })
   })
 })
