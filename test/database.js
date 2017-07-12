@@ -9,7 +9,7 @@ describe('database query tests', () => {
     return db.initDb()
   })
 
-  context('create contact', () => {
+  context('create and get contact', () => {
     contact = {
       first_name: 'Some',
       last_name: 'Person'
@@ -21,6 +21,16 @@ describe('database query tests', () => {
           expect(response[0].id).to.equal(4)
           expect(response[0].first_name).to.equal('Some')
           expect(response[0].last_name).to.equal('Person')
+        })
+      done()
+    })
+
+    it('should return 1 contact', (done) => {
+      database.getContact(1)
+        .then((response, error) => {
+          expect(response.id).to.equal(1)
+          expect(response.first_name).to.equal('Jared')
+          expect(response.last_name).to.equal('Grippe')
         })
       done()
     })

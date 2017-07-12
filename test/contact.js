@@ -22,8 +22,8 @@ describe('/contacts', () => {
           done(error)
         }
         expect(response).to.have.status(200)
-        done()
       })
+    done()
   })
 
   it('should delete a contact', (done) => {
@@ -34,8 +34,8 @@ describe('/contacts', () => {
           done(error)
         }
         expect(response.text).to.not.contain('<h1>Tanner&nbsp;Welsh</h1>')
-        done()
       })
+    done()
   })
 
   it('should return a first name and last name', (done) => {
@@ -46,7 +46,7 @@ describe('/contacts', () => {
           done(error)
         }
         expect(response.text).to.contain('<h1>Jared&nbsp;Grippe</h1>')
-        done()
       })
+    done()
   })
 })

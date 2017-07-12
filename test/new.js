@@ -21,8 +21,8 @@ describe('/new', () => {
         }
         expect(response).to.have.status(200)
         expect(response.text).to.contain('<h1>New Contact</h1>')
-        done()
       })
+    done()
   })
   it('should contain span element with First name', (done) => {
     chai.request('http://localhost:3000')
@@ -33,8 +33,8 @@ describe('/new', () => {
         }
         expect(response).to.have.status(200)
         expect(response.text).to.contain('<span>First name:</span>')
-        done()
       })
+    done()
   })
   it('should contain span element with Last name', (done) => {
     chai.request('http://localhost:3000')
@@ -45,7 +45,7 @@ describe('/new', () => {
         }
         expect(response).to.have.status(200)
         expect(response.text).to.contain('<span>Last name:</span>')
-        done()
       })
+    done()
   })
 })

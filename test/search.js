@@ -22,8 +22,8 @@ describe('/search', () => {
           done(error)
         }
         expect(response).to.have.status(200)
-        done()
       })
+    done()
   })
   it('should return the correct contact', (done) => {
     chai.request('http://localhost:3000')
@@ -34,7 +34,7 @@ describe('/search', () => {
         }
         expect(response.text).to.contain(
           '<input name="q" type="search" placeholder="search" value="Jared" autofocus/>')
-        done()
       })
+    done()
   })
 })
