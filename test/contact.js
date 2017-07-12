@@ -39,16 +39,14 @@ describe('/contacts', () => {
   })
 
   it('should return a first name and last name', (done) => {
-    setTimeout(() => {
-      chai.request('http://localhost:3000')
-        .get('/contacts/1')
-        .end((error, response) => {
-          if (error) {
-            done(error)
-          }
-          expect(response.text).to.contain('<h1>Jared&nbsp;Grippe</h1>')
-          done()
-        })
-    }, 500)
+    chai.request('http://localhost:3000')
+      .get('/contacts/1')
+      .end((error, response) => {
+        if (error) {
+          done(error)
+        }
+        expect(response.text).to.contain('<h1>Jared&nbsp;Grippe</h1>')
+        done()
+      })
   })
 })
