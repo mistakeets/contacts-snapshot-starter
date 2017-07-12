@@ -27,21 +27,9 @@ describe('/contacts', () => {
       })
   })
 
-  it('should return a first name and last name', (done) => {
-    chai.request('http://localhost:3000')
-      .get('/contacts/1')
-      .end((error, response) => {
-        if (error) {
-          done(error)
-        }
-        expect(response.text).to.contain('<h1>Jared&nbsp;Grippe</h1>')
-        done()
-      })
-  })
-
   it('should delete a contact', (done) => {
     chai.request('http://localhost:3000')
-      .get('/contacts/5/delete')
+      .get('/contacts/2/delete')
       .end((error, response) => {
         if (error) {
           done(error)
@@ -49,5 +37,20 @@ describe('/contacts', () => {
         expect(response.text).to.not.contain('<h1>Tanner&nbsp;Welsh</h1>')
         done()
       })
+  })
+
+  it('should return a first name and last name', (done) => {
+    setTimeout(function() {
+      chai.request('http://localhost:3000')
+        .get('/contacts/1')
+        .end((error, response) => {
+          if (error) {
+            done(error)
+          }
+          console.log('what is the response? -> ', response.text)
+          expect(response.text).to.contain('<h1>Jared&nbsp;Grippe</h1>')
+          done()
+        })
+    }, 500)
   })
 })
