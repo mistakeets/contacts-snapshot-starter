@@ -2,10 +2,17 @@ const chai = require('chai')
 const expect = chai.expect
 const chaiHttp = require('chai-http')
 const server = require('../server/routes/contacts.js')
+const db = require('./helpers/db')
 
 chai.use(chaiHttp)
 
 describe('/contacts', () => {
+
+  beforeEach((done) => {
+    db.initDb()
+    done()
+  })
+
   it('should create a new contact', (done) => {
     chai.request('http://localhost:3000')
       .post('/contacts')
