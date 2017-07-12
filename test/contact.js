@@ -8,9 +8,8 @@ chai.use(chaiHttp)
 
 describe('/contacts', () => {
 
-  beforeEach((done) => {
-    db.initDb()
-    done()
+  beforeEach(() => {
+    return db.initDb()
   })
 
   it('should create a new contact', (done) => {
