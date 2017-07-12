@@ -47,7 +47,6 @@ describe('/contacts', () => {
           if (error) {
             done(error)
           }
-          console.log('what is the response? -> ', response.text)
           expect(response.text).to.contain('<h1>Jared&nbsp;Grippe</h1>')
           done()
         })
