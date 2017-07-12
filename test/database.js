@@ -9,14 +9,21 @@ describe('database query tests', () => {
     return db.initDb()
   })
 
-  it('should add a contact to the database', (done) => {
+  context('create contact', () => {
     contact = {
       first_name: 'Some',
       last_name: 'Person'
     }
 
-    database.createContact(contact.first_name, contact.last_name)
-    console.log('do we get stuff?', database.getContacts)
-    done()
+    it('should add a contact to the database, returns id/name', (done) => {
+      database.createContact(contact)
+        .then((response, error) => {
+          expect(response[0].id).to.equal(4)
+          expect(response[0].first_name).to.equal('Some')
+          expect(response[0].last_name).to.equal('Person')
+        })
+      done()
+    })
+
   })
 })
