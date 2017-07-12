@@ -40,7 +40,7 @@ describe('/contacts', () => {
   })
 
   it('should return a first name and last name', (done) => {
-    setTimeout(function() {
+    setTimeout(() => {
       chai.request('http://localhost:3000')
         .get('/contacts/1')
         .end((error, response) => {
