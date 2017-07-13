@@ -15,74 +15,65 @@ describe('database query tests', () => {
       last_name: 'Person'
     }
 
-    it('should add a contact to the database, returns id/name', (done) => {
+    it('should add a contact to the database, returns id/name', () => {
       database.createContact(contact)
         .then((response, error) => {
-          if (error) { done(error) }
           expect(response[0].id).to.eql(4)
           expect(response[0].first_name).to.equal('Some')
           expect(response[0].last_name).to.equal('Person')
         })
-      done()
+        .catch(error => error)
     })
 
-    it('should return 1 contact', (done) => {
+    it('should return 1 contact', () => {
       database.getContact(1)
         .then((response, error) => {
-          if (error) { done(error) }
           expect(response.id).to.equal(1)
           expect(response.first_name).to.equal('Jared')
           expect(response.last_name).to.equal('Grippe')
         })
-      done()
+        .catch(error => error)
     })
 
-    it('should return all contacts', (done) => {
+    it('should return all contacts', () => {
       database.getContacts()
         .then((response, error) => {
-          if (error) { done(error) }
           expect(response.length).to.eql(3)
         })
-      done()
+        .catch(error => error)
     })
   })
 
   context('delete contact', () => {
-    it('should delete 1 contact', (done) => {
+    it('should delete 1 contact', () => {
       database.deleteContact(2)
+        .then(database.getContacts())
         .then((response, error) => {
-          if (error) { done(error) }
+          expect(response.length).to.eql(2)
         })
-        .then(database.getContacts()
-          .then((response, error) => {
-            if (error) { done(error) }
-            expect(response.length).to.eql(2)
-          }))
-      done()
+        .catch(error => error)
     })
   })
 
   context('search for contact', () => {
-    it('should find a contact', (done) => {
+    it('should find a contact', () => {
       const okContact = 'Jared'
       database.searchForContact(okContact)
         .then((response, error) => {
-          if (error) { done(error) }
           expect(response[0].id).to.eql(1)
           expect(response[0]).to.contain({ id: 1, first_name: 'Jared', last_name: 'Grippe' })
         })
-      done()
+        .catch(error => error)
     })
 
-    it('returns empty array if contact not found', (done) => {
+    it('returns empty array if contact not found', () => {
       const notFound = 'Keith'
       database.searchForContact(notFound)
         .then((response, error) => {
-          if (error) { done(error) }
           console.log('WHAT?', response)
           expect(response).to.eql([])
         })
-      done()
+        .catch(error => error)
     })
 
   })
