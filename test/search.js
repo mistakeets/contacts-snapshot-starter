@@ -6,8 +6,6 @@ const db = require('./helpers/db')
 
 chai.use(chaiHttp)
 
-
-
 describe('/search', () => {
 
   beforeEach(() => {
@@ -18,23 +16,17 @@ describe('/search', () => {
     chai.request('http://localhost:3000')
       .get('/contacts/search?q=Jared')
       .end((error, response) => {
-        if (error) {
-          done(error)
-        }
         expect(response).to.have.status(200)
+        done(error)
       })
-    done()
   })
   it('should return the correct contact', (done) => {
     chai.request('http://localhost:3000')
       .get('/contacts/search?q=Jared')
       .end((error, response) => {
-        if (error) {
-          done(error)
-        }
         expect(response.text).to.contain(
           '<input name="q" type="search" placeholder="search" value="Jared" autofocus/>')
+        done(error)
       })
-    done()
   })
 })
