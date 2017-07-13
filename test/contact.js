@@ -12,7 +12,7 @@ describe('/contacts', () => {
     return db.initDb()
   })
 
-  it('should create a new contact', (done) => {
+  it('should create a new contact and return status code 302', (done) => {
     chai.request('http://localhost:3000')
       .post('/contacts')
       .type('form')
@@ -21,7 +21,7 @@ describe('/contacts', () => {
         if (error) {
           done(error)
         }
-        expect(response).to.have.status(200)
+        expect(response).to.have.status(302)
       })
     done()
   })
