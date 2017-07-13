@@ -16,36 +16,27 @@ describe('/new', () => {
     chai.request('http://localhost:3000')
       .get('/contacts/new')
       .end((error, response) => {
-        if (error) {
-          done(error)
-        }
         expect(response).to.have.status(200)
         expect(response.text).to.contain('<h1>New Contact</h1>')
+        done(error)
       })
-    done()
   })
   it('should contain span element with First name', (done) => {
     chai.request('http://localhost:3000')
       .get('/contacts/new')
       .end((error, response) => {
-        if (error) {
-          done(error)
-        }
         expect(response).to.have.status(200)
         expect(response.text).to.contain('<span>First name:</span>')
+        done(error)
       })
-    done()
   })
   it('should contain span element with Last name', (done) => {
     chai.request('http://localhost:3000')
       .get('/contacts/new')
       .end((error, response) => {
-        if (error) {
-          done(error)
-        }
         expect(response).to.have.status(200)
         expect(response.text).to.contain('<span>Last name:</span>')
+        done(error)
       })
-    done()
   })
 })
