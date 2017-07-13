@@ -15,8 +15,8 @@ describe('Testing things!', () => {
           done(error)
         }
         expect(response).to.have.status(200)
-        done()
       })
+    done()
   })
   it('should return html', (done) => {
     chai.request('http://localhost:3000')
@@ -26,7 +26,7 @@ describe('Testing things!', () => {
           done(error)
         }
         expect(response).to.be.html
-        done()
       })
+    done()
   })
 })

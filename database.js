@@ -17,12 +17,7 @@ const createContact = function(contact, callback) {
 }
 
 const getContacts = function() {
-  return db.query(`
-    SELECT
-      *
-    FROM
-      contacts
-    `, [])
+  return db.query(`SELECT * FROM contacts`, [])
     .then(data => data)
     .catch(error => error);
 }
