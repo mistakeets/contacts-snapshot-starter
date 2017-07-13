@@ -26,6 +26,7 @@ app.get('/', (request, response) => {
 app.use('/contacts', contacts)
 
 app.use((request, response) => {
+  response.status(404)
   response.render('not_found')
 })
 
