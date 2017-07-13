@@ -70,7 +70,6 @@ describe('database query tests', () => {
       const notFound = 'Keith'
       database.searchForContact(notFound)
         .then((response, error) => {
-          console.log('WHAT?', response)
           expect(response).to.eql([])
         })
         .catch(error => error)
