@@ -24,7 +24,7 @@ describe('/contacts', () => {
       })
   })
 
-  it('response should have if sent bogus information', (done) => {
+  it('response should error have if sent bogus information', (done) => {
     chai.request('http://localhost:3000')
       .post('/contacts')
       .type('form')
