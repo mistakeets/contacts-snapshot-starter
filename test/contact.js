@@ -3,14 +3,15 @@ const expect = chai.expect
 const should = chai.should()
 const chaiHttp = require('chai-http')
 const server = require('../server/routes/contacts.js')
-const db = require('./helpers/db')
+const dbHelper = require('./helpers/db')
+const makeDbConnection = require('../db').makeDbConnection
 
 chai.use(chaiHttp)
 
 describe('/contacts', () => {
 
   beforeEach(() => {
-    return db.initDb()
+    return dbHelper.initDb()
   })
 
   it('should create a new contact and return status code 200', (done) => {
@@ -24,7 +25,7 @@ describe('/contacts', () => {
       })
   })
 
-  it('response should have if sent bogus information', (done) => {
+  it('response should error have if sent bogus information', (done) => {
     chai.request('http://localhost:3000')
       .post('/contacts')
       .type('form')

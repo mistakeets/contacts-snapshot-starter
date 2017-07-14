@@ -2,12 +2,12 @@ const chai = require('chai')
 const expect = chai.expect
 const should = chai.should()
 const database = require('../database')
-const db = require('./helpers/db')
+const dbHelper = require('./helpers/db')
 
 describe('database query tests', () => {
 
   beforeEach(() => {
-    return db.initDb()
+    return dbHelper.initDb()
   })
 
   context('create and get contact', () => {

@@ -1,6 +1,6 @@
 const Queryfile = require('pg-promise').QueryFile
 const path = require('path')
-const db = require('../../db')
+const db = require('../../db').conn
 
 function sql(file) {
   const fullPath = path.join(__dirname, file)
@@ -13,11 +13,11 @@ const initFileConfig = {
 }
 
 const resetDb = () => {
-  return db.none(initFileConfig.reset)
+  return db().none(initFileConfig.reset)
 }
 
 const seedDb = () => {
-  return db.any(initFileConfig.seed)
+  return db().any(initFileConfig.seed)
 }
 
 const initDb = () => {

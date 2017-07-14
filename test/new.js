@@ -2,14 +2,14 @@ const chai = require('chai')
 const expect = chai.expect
 const chaiHttp = require('chai-http')
 const server = require('../server/routes/contacts.js')
-const db = require('./helpers/db')
+const dbHelper = require('./helpers/db')
 
 chai.use(chaiHttp)
 
 describe('/new', () => {
 
   beforeEach(() => {
-    return db.initDb()
+    return dbHelper.initDb()
   })
 
   it('should contain h1 element', (done) => {
