@@ -2,9 +2,9 @@ const chai = require('chai')
 const expect = chai.expect
 const should = chai.should()
 const chaiHttp = require('chai-http')
-const server = require('../server/routes/contacts.js')
 const dbHelper = require('./helpers/db')
 const makeDbConnection = require('../db').makeDbConnection
+const server = require('../server')
 
 chai.use(chaiHttp)
 
@@ -15,7 +15,7 @@ describe('/contacts', () => {
   })
 
   it('should create a new contact and return status code 200', (done) => {
-    chai.request('http://localhost:3000')
+    chai.request(server)
       .post('/contacts')
       .type('form')
       .send({ first_name: 'That', last_name: 'Person' })
@@ -26,7 +26,7 @@ describe('/contacts', () => {
   })
 
   it('response should error have if sent bogus information', (done) => {
-    chai.request('http://localhost:3000')
+    chai.request(server)
       .post('/contacts')
       .type('form')
       .send({ sport: 'Baseball', drink: 'Beer' })
@@ -37,7 +37,7 @@ describe('/contacts', () => {
   })
 
   it('should delete a contact', (done) => {
-    chai.request('http://localhost:3000')
+    chai.request(server)
       .get('/contacts/2/delete')
       .end((error, response) => {
         expect(response.text).to.not.contain('<h1>Tanner&nbsp;Welsh</h1>')
@@ -46,11 +46,12 @@ describe('/contacts', () => {
   })
 
   it('should return a first name and last name', (done) => {
-    chai.request('http://localhost:3000')
+    chai.request(server)
       .get('/contacts/1')
       .end((error, response) => {
         expect(response.text).to.contain('<h1>Jared&nbsp;Grippe</h1>')
         done(error)
       })
   })
+
 })
