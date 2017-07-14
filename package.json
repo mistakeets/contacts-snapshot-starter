@@ -9,7 +9,7 @@
     "db:reset": "dropdb contacts && createdb contacts && npm run load_schema",
     "load_schema": "psql contacts < schema.sql",
     "load_contacts": "psql contacts < contacts.sql",
-    "test": "nyc mocha test/*.js"
+    "test": "NODE_ENV=test nyc mocha test/*.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.1",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "pg-promise": "^6.2.1"

@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const database = require('./database')
@@ -5,6 +6,7 @@ const app = express()
 const { renderError } = require('./server/utils')
 const contacts = require('./server/routes/contacts')
 const morgan = require('morgan')
+const config = require('./config/index.js')
 
 app.set('view engine', 'ejs');
 
@@ -15,7 +17,7 @@ app.use((request, response, next) => {
   next()
 })
 
-app.use(morgan('combined'))
+app.use(morgan('dev'))
 
 app.get('/', (request, response) => {
   const contacts = database.getContacts()
@@ -31,7 +33,7 @@ app.use((request, response) => {
 })
 
 
-const port = process.env.PORT || 3000
+const port = config.port
 app.listen(port, () => {
   console.log(`http://localhost:${port}`)
 })
