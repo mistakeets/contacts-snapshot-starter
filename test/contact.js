@@ -1,5 +1,6 @@
 const chai = require('chai')
 const expect = chai.expect
+const should = chai.should()
 const chaiHttp = require('chai-http')
 const server = require('../server/routes/contacts.js')
 const db = require('./helpers/db')
@@ -19,6 +20,17 @@ describe('/contacts', () => {
       .send({ first_name: 'That', last_name: 'Person' })
       .end((error, response) => {
         expect(response).to.have.status(200)
+        done(error)
+      })
+  })
+
+  it('response should have if sent bogus information', (done) => {
+    chai.request('http://localhost:3000')
+      .post('/contacts')
+      .type('form')
+      .send({ sport: 'Baseball', drink: 'Beer' })
+      .end((error, response) => {
+        response.should.have.property('error')
         done(error)
       })
   })
