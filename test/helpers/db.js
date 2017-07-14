@@ -13,11 +13,11 @@ const initFileConfig = {
 }
 
 const resetDb = () => {
-  return db.none(initFileConfig.reset)
+  return db().none(initFileConfig.reset)
 }
 
 const seedDb = () => {
-  return db.any(initFileConfig.seed)
+  return db().any(initFileConfig.seed)
 }
 
 const initDb = () => {
