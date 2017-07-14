@@ -1,7 +1,7 @@
 const chai = require('chai')
 const expect = chai.expect
 const chaiHttp = require('chai-http')
-const server = require('../server/routes/contacts.js')
+const server = require('../server')
 const dbHelper = require('./helpers/db')
 
 chai.use(chaiHttp)
@@ -13,7 +13,7 @@ describe('/new', () => {
   })
 
   it('should contain h1 element', (done) => {
-    chai.request('http://localhost:3000')
+    chai.request(server)
       .get('/contacts/new')
       .end((error, response) => {
         expect(response).to.have.status(200)
@@ -22,7 +22,7 @@ describe('/new', () => {
       })
   })
   it('should contain span element with First name', (done) => {
-    chai.request('http://localhost:3000')
+    chai.request(server)
       .get('/contacts/new')
       .end((error, response) => {
         expect(response).to.have.status(200)
@@ -31,7 +31,7 @@ describe('/new', () => {
       })
   })
   it('should contain span element with Last name', (done) => {
-    chai.request('http://localhost:3000')
+    chai.request(server)
       .get('/contacts/new')
       .end((error, response) => {
         expect(response).to.have.status(200)
