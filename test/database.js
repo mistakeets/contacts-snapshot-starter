@@ -60,13 +60,23 @@ describe('database query tests', () => {
   context('delete contact', () => {
     it('should delete 1 contact', (done) => {
       database.deleteContact(2)
-        .then(database.getContacts()
+        .then(() => database.getContacts()
           .then((response) => {
             expect(response.length).to.eql(2)
           })
           .then(done, done))
     })
+
+    it('should not delete anything if given invalid input', (done) => {
+      database.deleteContact(10)
+        .then(() => database.getContacts()
+          .then((response) => {
+            expect(response.length).to.eql(3)
+          })
+          .then(done, done))
+    })
   })
+
 
   context('search for contact', () => {
     it('should find a contact', (done) => {
