@@ -25,13 +25,13 @@ describe('/contacts', () => {
       })
   })
 
-  it('response should error have if sent bogus information', (done) => {
+  it('response should have error if sent bogus information', (done) => {
     chai.request(server)
       .post('/contacts')
       .type('form')
       .send({ sport: 'Baseball', drink: 'Beer' })
       .end((error, response) => {
-        response.should.have.property('error')
+        expect(response.text).to.contain('ERROR: Cannot read property \'id')
         done(error)
       })
   })
