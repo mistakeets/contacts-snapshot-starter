@@ -1,4 +1,5 @@
-html, body{
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100vw;
@@ -15,11 +16,10 @@ textarea {
   font-family: monospace;
 }
 
-
 nav {
   background-color: black;
-  color: white;
   padding: 0.3em 0.5em;
+  color: white;
 }
 
 nav a {
@@ -32,11 +32,10 @@ nav .search-form {
 }
 
 nav .search-form input {
-  border-radius: 5px;
   border: none;
   padding: 0.3em 0.5em;
+  color: black;
 }
-
 
 .page-column {
   width: 700px;
@@ -47,36 +46,38 @@ nav .search-form input {
   min-height: 100vh;
 }
 
-.page-column-content{
+.page-column-content {
   padding: 1em;
 }
 
-.contact-list{
+.contact-list {
   display: flex;
   flex-direction: column;
 }
 
-.contact-list-member{
+.contact-list-member {
   display: flex;
   flex-direction: row;
   padding: 0.2em 0.3em;
 }
-.contact-list-member:hover{
+
+.contact-list-member:hover {
   background-color: lightgrey;
 }
 
-.contact-list-member a{
+.contact-list-member a {
   text-decoration: none;
 }
-.contact-list-member a:hover{
+
+.contact-list-member a:hover {
   text-decoration: underline;
 }
 
-.contact-list-member .contact-link{
+.contact-list-member .contact-link {
   flex: 1 1 auto;
 }
 
-.contact-show-page-controls{
+.contact-show-page-controls {
   text-align: right;
 }
 
@@ -85,7 +86,7 @@ nav .search-form input {
   margin-bottom: 1em;
 }
 
-.new-contact-form label > span {
+.new-contact-form label>span {
   display: inline-block;
   min-width: 8em;
 }

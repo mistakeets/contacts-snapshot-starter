@@ -1,4 +1,4 @@
-<%- include header.ejs %>
+<%- include partials/header.ejs %>
 
   <h1>Contacts</h1>
 
@@ -6,11 +6,12 @@
     <% contacts.forEach(function(contact){ %>
       <div class="contact-list-member">
         <a class="contact-link" href="/contacts/<%= contact.id %>">
-          <%= contact.first_name %>&nbsp;<%= contact.last_name %>
+          <%= contact.first_name %>&nbsp;
+            <%= contact.last_name %>
         </a>
         <a class="delete-contact" href="/contacts/<%= contact.id %>/delete" tabindex="-1">X</a>
       </div>
-    <% }) %>
+      <% }) %>
   </div>
 
-<%- include footer.ejs %>
+  <%- include partials/footer.ejs %>
