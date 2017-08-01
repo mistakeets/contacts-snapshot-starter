@@ -4,11 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "start:dev": "nodemon server.js",
+    "start": "node src/server.js",
+    "start:dev": "nodemon src/server.js",
     "db:reset": "dropdb contacts && createdb contacts && npm run load_schema",
     "load_schema": "psql contacts < schema.sql",
-    "load_contacts": "psql contacts < contacts.sql",
+    "load_contacts": "psql contacts < src/database/schema.sql",
     "test": "NODE_ENV=test nyc mocha test/*.js"
   },
   "repository": {
@@ -19,10 +19,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
+    "express-session": "^1.15.4",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "pg-promise": "^6.2.1"
   },
   "devDependencies": {

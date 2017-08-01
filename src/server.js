@@ -1,12 +1,12 @@
 require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
-const database = require('./database')
+const database = require('./database/db')
 const app = express()
 const { renderError } = require('./server/utils')
-const contacts = require('./server/routes/contacts')
 const morgan = require('morgan')
-const config = require('./config/index.js')
+const config = require('../config/index.js')
+const routes = require('./routes')
 
 app.set('view engine', 'ejs');
 
@@ -19,19 +19,12 @@ app.use((request, response, next) => {
 
 app.use(morgan('dev'))
 
-app.get('/', (request, response) => {
-  const contacts = database.getContacts()
-    .then((contacts) => { response.render('index', { contacts }) })
-    .catch(err => console.log('err', err))
-})
-
-app.use('/contacts', contacts)
+app.get('/', routes)
 
 app.use((request, response) => {
   response.status(404)
   response.render('not_found')
 })
-
 
 const port = config.port
 app.listen(port, () => {

@@ -1,0 +1,15 @@
+<nav class="navbar navbar-static-top navbar-inverse bg-inverse">
+  <div class="navbar-brand">
+    <a href="/">Home</a>
+  </div>
+  <form method="get" action="/contacts/search" class="search-form">
+    <div>
+      <input name="q" type="search" placeholder="search" value="<%= query %>" autofocus/>
+      <input type="submit" style="display: none" />
+    </div>
+  </form>
+  <a href="/contacts/new">New Contact</a>
+  <a class="btn btn-default" href="/signup">Sign Up</a>
+  <a class="btn btn-default" href="/login">Login</a>
+
+</nav>
