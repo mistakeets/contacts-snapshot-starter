@@ -37,6 +37,10 @@ nav .search-form input {
   color: black;
 }
 
+.rspace {
+  margin-right: 5px;
+}
+
 .page-column {
   width: 700px;
   margin: 0 auto;
