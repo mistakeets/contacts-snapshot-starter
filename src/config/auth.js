@@ -11,19 +11,20 @@ passport.use('local', new LocalStrategy({
     session: true
   },
   function(req, email, password, done) {
-    const hash = bcrypt.hashSync(password, 10)
+    const hash = bcrypt.hash(password, 10)
     DbUsers.checkUserByEmail(email)
       .then(user => {
         if (!user) {
           return done(null, false)
         }
-        if (!bcrypt.compareSync(password, hash)) {
+        if (!bcrypt.compare(password, hash)) {
           return done(null, false)
         }
         return done(null, user[0])
       })
       .catch(error => error)
-  }))
+  }
+))
 
 passport.serializeUser((user, done) => {
   done(null, user.id)
