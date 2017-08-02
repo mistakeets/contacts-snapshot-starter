@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const contacts = require('./contacts')
-const DbContacts = require('../database/contacts');
-const DbUsers = require('../database/users')
+const DbContacts = require('../../db/contacts');
+const DbUsers = require('../../db/users')
 const bcrypt = require('bcrypt')
 const passport = require('../../config/auth')
+const isLoggedIn = require('../middleware')
 
 router.get('/signup', (request, response) => {
   response.render('signup')
@@ -12,13 +13,13 @@ router.get('/signup', (request, response) => {
 router.post('/signup', (request, response, next) => {
   const salt = bcrypt.genSaltSync(10)
   const hash = bcrypt.hashSync(request.body.password, salt)
-
+  console.log('WHAT THE HECK?', request.body)
   const credentials = {
     'name': request.body.name,
     'email': request.body.email,
     'password': hash
   }
-
+  console.log('WHAT NOW?', credentials)
   DbUsers.createUser(credentials)
     .then(function(contact) {
       if (contact)
@@ -38,14 +39,18 @@ router.post('/login',
     successFailure: '/login'
   }))
 
+router.get('/logout', (request, response) => {
+  request.session.destroy(() => {
+    response.redirect('/login')
+  })
+})
 
-router.get('/', (request, response) => {
+router.get('/', isLoggedIn, (request, response) => {
   DbContacts.getContacts()
     .then((contacts) => { response.render('index', { contacts }) })
     .catch(err => console.log('err', err))
 })
 
-router.use('/contacts', contacts); // /contacts/search
-// router.use('/auth', auth) // /auth/signup ...
+router.use('/contacts', isLoggedIn, contacts); // /contacts/search
 
 module.exports = router;

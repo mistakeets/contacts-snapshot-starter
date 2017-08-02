@@ -1,5 +1,5 @@
-const DbContacts = require('../database/contacts')
-const { renderError } = require('../server/utils')
+const DbContacts = require('../../db/contacts')
+const { renderError } = require('../utils')
 
 const router = require('express').Router()
 
