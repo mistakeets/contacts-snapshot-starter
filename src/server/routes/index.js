@@ -1,26 +1,18 @@
 const router = require('express').Router();
 const contacts = require('./contacts')
 const DbContacts = require('../../db/contacts');
-const DbUsers = require('../../db/users')
+const User = require('../../models/users')
 const bcrypt = require('bcrypt')
 const passport = require('../../config/auth')
-const isLoggedIn = require('../middleware')
+const { isLoggedIn } = require('../middlewares')
+
 
 router.get('/signup', (request, response) => {
   response.render('signup')
 })
 
 router.post('/signup', (request, response, next) => {
-  const salt = bcrypt.genSaltSync(10)
-  const hash = bcrypt.hashSync(request.body.password, salt)
-  console.log('WHAT THE HECK?', request.body)
-  const credentials = {
-    'name': request.body.name,
-    'email': request.body.email,
-    'password': hash
-  }
-  console.log('WHAT NOW?', credentials)
-  DbUsers.createUser(credentials)
+  User.createUser(request.body.name, request.body.email, request.body.password)
     .then(function(contact) {
       if (contact)
         return response.redirect(`/login`)
@@ -36,7 +28,8 @@ router.get('/login', (request, response) => {
 router.post('/login',
   passport.authenticate('local', {
     successRedirect: '/',
-    successFailure: '/login'
+    failureRedirect: '/login',
+    failureFlash: true
   }))
 
 router.get('/logout', (request, response) => {
@@ -51,6 +44,6 @@ router.get('/', isLoggedIn, (request, response) => {
     .catch(err => console.log('err', err))
 })
 
-router.use('/contacts', isLoggedIn, contacts); // /contacts/search
+router.use('/contacts', isLoggedIn, contacts)
 
 module.exports = router;
