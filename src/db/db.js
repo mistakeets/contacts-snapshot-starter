@@ -1,20 +1,14 @@
-// module.exports = (function() {
-//   var db
-//   const makeDbConnection = () => {
-//     const pgp = require('pg-promise')()
-//     const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/contacts'
-//     db = pgp(connectionString)
-//     return db
-//   }
-//   makeDbConnection()
-//   return {
-//     conn: () => db,
-//     makeDbConnection
-//   }
-// })()
-
-const pgp = require('pg-promise')()
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/contacts_development'
-const db = pgp(connectionString)
-
-module.exports = db
+module.exports = (function() {
+  var db
+  const makeDbConnection = () => {
+    const pgp = require('pg-promise')()
+    const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/contacts_development'
+    db = pgp(connectionString)
+    return db
+  }
+  makeDbConnection()
+  return {
+    conn: () => db,
+    makeDbConnection
+  }
+})()
