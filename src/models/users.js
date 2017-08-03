@@ -13,7 +13,7 @@ const createUser = (name, email, password) => {
 }
 
 const getUserRole = () => {
-
+  return DbUsers.getUserByRole()
 }
 
 module.exports = {
