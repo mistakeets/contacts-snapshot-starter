@@ -2,17 +2,21 @@ const router = require('express').Router()
 const auth = require('./auth')
 const contacts = require('./contacts')
 const DbContacts = require('../../db/contacts')
+const admin = require('./admin')
 
 const { isLoggedIn } = require('../middlewares')
 
 router.use('/auth', auth)
+router.use(isLoggedIn)
+router.use('/contacts', contacts)
 
-router.get('/', isLoggedIn, (request, response) => {
+router.get('/', (request, response) => {
   DbContacts.getContacts()
     .then((contacts) => { response.render('index', { contacts }) })
     .catch(err => console.log('err', err))
 })
 
-router.use('/contacts', isLoggedIn, contacts)
+
+router.use('/admin', admin)
 
 module.exports = router

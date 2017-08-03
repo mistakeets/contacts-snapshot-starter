@@ -7,16 +7,24 @@ router.get('/signup', (request, response) => {
 })
 
 router.post('/signup', (request, response, next) => {
-  User.createUser(request.body.name, request.body.email, request.body.password)
-    .then(function(contact) {
-      if (contact)
-        return response.render('login', {
-          message: `Welcome to Contact App ${request.body.name}! Please login.`,
-          success: true
-        })
-      next()
+  const { name, email, password, passwordConfirm } = request.body
+  if (password === passwordConfirm) {
+    User.createUser(request.body.name, request.body.email, request.body.password)
+      .then(function(contact) {
+        if (contact)
+          return response.render('login', {
+            message: `Welcome to Contact App ${request.body.name}! Please login.`,
+            success: true
+          })
+        next()
+      })
+      .catch(error => renderError(error, response, response))
+  } else {
+    response.render('signup', {
+      message: 'Passwords do not match.',
+      success: false
     })
-    .catch(error => renderError(error, response, response))
+  }
 })
 
 router.get('/login', (request, response) => {

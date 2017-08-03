@@ -25,13 +25,15 @@
                       <form method="post" action="/auth/login">
                         <div class="form-group">
                           <label for="email">Email:</label>
-                          <input type="email" name="email" placeholder="email@email.com">
+                          <input type="email" name="email" placeholder="email@email.com" required>
                         </div>
                         <div class="form-group">
                           <label for="password">Password:</label>
-                          <input type="password" name="password" placeholder="password">
+                          <input type="password" name="password" placeholder="password" required>
                         </div>
-                        <input class="btn btn-success" type="submit" name="submit" value="Submit">
+                        <div class="text-center">
+                          <input class="btn btn-success" type="submit" name="submit" value="Submit">
+                        </div>
                       </form>
 
                     </div>
