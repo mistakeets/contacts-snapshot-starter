@@ -2,7 +2,7 @@ const { ALL_USER_ROLES, CAPABILITY_ROLES } = require('../authorization/roles')
 
 const isLoggedIn = (request, response, next) => {
   if (!request.user) {
-    response.redirect('/login')
+    response.redirect('/auth/login')
   } else {
     response.locals.isLoggedIn = true
     next()

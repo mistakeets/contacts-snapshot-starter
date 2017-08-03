@@ -12,4 +12,11 @@ const createUser = (name, email, password) => {
   })
 }
 
-module.exports = { createUser }
+const getUserRole = () => {
+
+}
+
+module.exports = {
+  createUser,
+  getUserRole
+}
