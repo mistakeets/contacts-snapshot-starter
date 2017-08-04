@@ -8,23 +8,16 @@ const isLoggedIn = (request, response, next) => {
     next()
   }
 }
-const userIsAdmin = user => user.role === 'admin'
 
-// const userHasAccess = (user, action) => {
-//   const role = user.role
-//   const allActions = Object.keys(CAPABILITY_ROLES)
-//   const isValidRole = ALL_USER_ROLES.includes(role)
-//   if (!isValidRole) {
-//     throw new Error(`User with email: ${user.email} does not have a role!`)
-//   } else if (!allActions.includes(action)) {
-//     throw new Error(`Tried to get permission for an invalid action. Action: ${action}`)
-//   } else {
-//     const capabilities = CAPABILITY_ROLES[action]
-//     return capabilities.includes(user.role)
-//   }
-// }
-
-
+const userIsAdmin = (request, response, next) => {
+  if (request.user[0].role === 'admin') {
+    response.locals.isAdmin = true
+    next()
+  } else {
+    response.locals.isAdmin = false
+    next()
+  }
+}
 
 module.exports = {
   isLoggedIn,

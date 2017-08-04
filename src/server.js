@@ -6,8 +6,6 @@ const cookieParser = require('cookie-parser')
 const passport = require('./config/auth')
 const session = require('express-session')
 const morgan = require('morgan')
-const dbContacts = require('./db/contacts')
-const { renderError } = require('./server/utils')
 const routes = require('./server/routes')
 
 app.set('view engine', 'ejs')
@@ -25,14 +23,15 @@ app.use(passport.session())
 app.use((request, response, next) => {
   response.locals.query = ''
   response.locals.message = ''
-  response.locals.success = ''
+  response.locals.success = null
+  response.locals.isAdmin = false
   next()
 })
 
 app.use('/', routes)
 
 app.use((request, response) => {
-  response.status(404).render('not_found')
+  response.status(404).render('errors/not_found')
 })
 
 const port = process.env.PORT || 3000
