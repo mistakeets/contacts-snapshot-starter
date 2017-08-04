@@ -1,5 +1,7 @@
-const renderError = function(error, response, response){
+const renderError = function(error, response, response) {
   response.send(`ERROR: ${error.message}\n\n${error.stack}`)
 }
 
-module.exports = {renderError}
+module.exports = {
+  renderError
+}
